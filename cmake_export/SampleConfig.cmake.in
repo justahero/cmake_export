@@ -1,0 +1,28 @@
+# Config file for the sample project
+# 
+#
+
+@PACKAGE_INIT@
+
+message (STATUS "SampleConfig 1")
+get_filename_component (SAMPLE_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+message (STATUS "SampleConfig SAMPLE_CMAKE_DIR: ${SAMPLE_CMAKE_DIR}")
+if (EXISTS "${SAMPLE_CMAKE_DIR}/CMakeCache.txt")
+    message (STATUS "SampleConfig 2")
+    include ("${SAMPLE_CMAKE_DIR}/SampleBuildTreeSettings.cmake")
+    message (STATUS "SampleConfig 3")
+    include ("${SAMPLE_CMAKE_DIR}/SampleLibraryDepends.cmake")
+    message (STATUS "SampleConfig 4")
+else ()
+    message (STATUS "SampleConfig 5")
+    set (SAMPLE_INCLUDE_DIR "${SAMPLE_CMAKE_DIR}/libs/libfoo")
+    message (STATUS "SampleConfig 6 SAMPLE_INCLUDE_DIR: ${SAMPLE_INCLUDE_DIR}")
+endif ()
+
+message (STATUS "SampleConfig 6")
+message (STATUS "SampleConfig SAMPLE_INCLUDE_DIR: ${SAMPLE_INCLUDE_DIR}")
+set (SAMPLE_INCLUDE_DIR "${SAMPLE_CMAKE_DIR}/libs/libfoo")
+set (SAMPLE_LIBRARIES foo)
+set (SAMPLE_EXECUTABLE project_a)
+set (SAMPLE_INCLUDE_DIRS "${SAMPLE_CMAKE_DIR}/@CONF_REL_INCLUDE_DIR@")
+message (STATUS "SampleConfig 7")
